@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @category.title %>
+</p>
+
+<h2> Questions </h2>
+<div id="questions">
+<% @category.questions.each do | question | %>
+  <%= div_for question do %>
+  <p>
+  <strong> Posted <%= time_ago_in_words (question.created_at ) %>
+  </strong> <br />
+  <%= h(question.title) %>  
+
+  </p>
+  <% end %>
+  <% end %>
+  </div>
+
+<%= form_for([@category,Question.new]) do |f| %>
+<p> <%= f.label :title, "New Question" %> <br/>
+<%= f.text_area :title %>
+</p>
+<p> <%= f.submit "Add Question" %> </p>
+<% end %>
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
